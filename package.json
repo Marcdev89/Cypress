@@ -1,0 +1,19 @@
+{
+  "name": "testingproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open --browser chrome --e2e"
+  },
+  "keywords": [
+    "cypress",
+    "testing",
+    "javascript"
+  ],
+  "author": "Marc Vitoria",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.6.0"
+  }
+}

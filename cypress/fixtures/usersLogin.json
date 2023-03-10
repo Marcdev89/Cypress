@@ -1,0 +1,37 @@
+[
+    {
+        "type":"administrator",
+        "username": "administradorQA",
+        "password": "W#m0EB3%7Occ",
+        "expected": "Administrador",
+        "path": "inicio-dashboard"
+    },
+    {
+        "type":"teacher",
+        "username": "james",
+        "password": "1234",
+        "expected": "Tutor",
+        "path": "inicio-tutor"
+    },
+    {
+        "type":"student",
+        "username": "alumna",
+        "password": "1234",
+        "expected": "Alumno",
+        "path": "formacion"
+    },
+    {
+        "type":"auditor",
+        "username": "fer",
+        "password": "1234",
+        "expected": "Auditor",
+        "path": "inicio-auditor"
+    },
+    {
+        "type":"superadmin",
+        "username": "sadmin",
+        "password": "admin1234",
+        "expected": "Superadministrador",
+        "path": "inicio-superadmin"
+    }
+]

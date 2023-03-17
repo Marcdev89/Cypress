@@ -7,7 +7,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    //change by QA environment (1-4)
+    //need to be changed by .env
     baseUrl: 'https://qa4.ncampus.vertice.org/'
   },
 });

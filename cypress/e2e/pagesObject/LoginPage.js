@@ -37,18 +37,13 @@ class LoginPage{
         this.elements.formLogin().submit();
     }
 
-    getUrl(number){
-        urlasdadsa.com + (number)
-    }
-
     login(username, password){
         cy.intercept({
             url:'*', method: 'POST'},(req)=>{
                 if(req.headers['authorization']!==undefined)
                 {
                     req.headers['Authorization']=req.headers['authorization']
-                }
-                req.headers['user-agent']='Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/110.0'                    
+                }                  
             }).as('all')
         this.elements.url();
         this.elements.usernameInput().type(username);

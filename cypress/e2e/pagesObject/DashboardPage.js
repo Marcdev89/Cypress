@@ -2,25 +2,7 @@ class DashboardPage{
 
 /* LOCALIZATIONS */
 
-    header = {
-        
-        tab: () => cy.get('[title="Configuración de clientes"]'),
-        logo: () => cy.get('[title="Logo"]'),
-        profileImg: () => cy.get('#img-usr-perfil'),
-        date: () => cy.get('#fechaActual'),
-        rol: () => cy.get('.date'),
-        dropdown : {    
-                        profile: () => cy.contains('ul', 'Mi Perfil', { matchCase: false }),
-                        profile: () => cy.contains('ul', 'Convocatorias', { matchCase: false }),
-                        logOutLocalization: () => cy.contains('ul', 'Cerrar sesión', { matchCase: false }),
-                        modalLogOut: () => ('#formLogout'),
-                        btnLogOutYes: () => ('[title = "Sí"]'),
-                        btnLogOutNo: () => ('[title = "No"]') 
-                    }
-    }
-
-
-    body = {
+    elements = {
 
         title: () => cy.get('.title no-margin'),
         infoIcon: () => cy.get('.extra-info'),
@@ -62,11 +44,6 @@ class DashboardPage{
     
     url= () => cy.visit('inicio-dashboard');
     
-    logOutFunction(){
-        profileImg().click()
-        logOutLocalization().click()
-        btnLogOutYes().click()
-    }
 }
 
 module.exports = new DashboardPage();

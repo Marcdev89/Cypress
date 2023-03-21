@@ -12,9 +12,9 @@
     "testing",
     "javascript"
   ],
-  "author": "Marc Vitoria",
+  "author": "Marc Vitoria, Elric Cordon, Alex Gassó, Ivan Cortés",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.8.1"
+    "cypress": "^12.7.0"
   }
 }

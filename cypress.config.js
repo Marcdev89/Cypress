@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
@@ -8,6 +10,6 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     //need to be changed by .env
-    baseUrl: 'https://qa4.ncampus.vertice.org/'
+    baseUrl: process.env.QA_URL
   },
 });

@@ -27,3 +27,9 @@ build/Release
 node_modules
 cypress/videos
 cypress/screenshots
+
+# Local Development
+.env
+
+# Jetbrains
+.idea

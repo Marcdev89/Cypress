@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress open --browser chrome --e2e",
+    "ci": "cypress run",
     "electron": "cypress open --browser electron --e2e"
   },
   "keywords": [

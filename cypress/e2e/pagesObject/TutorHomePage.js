@@ -27,7 +27,7 @@ class TutorHomePage {
                         bookmark: () => cy.get('[title="Marcar Favoritos"]'),
     
                         menu : {
-                                announcements : () => cy.get('[title="Comunicaciones"]'),
+                                communications : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(1) > img'),
                                 content : () => cy.get('[title="Contenidos"]'),
                                 followUp : () => cy.get('[title="Seguimiento de alumnos"]'),
                                 tutorials : () => cy.get('[title="Tutorías"]'),

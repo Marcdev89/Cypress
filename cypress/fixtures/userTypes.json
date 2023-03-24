@@ -1,32 +1,32 @@
 {
-    "admin":    
-                {
-                    "name": "AdministradorQA",
-                    "pass": "W#m0EB3%7Occ"
-                    
-                },
+  "admin":    
+              {
+                  "name": "AdministradorQA",
+                  "pass": "W#m0EB3%7Occ"
+                  
+              },
 
-    "tutor":
-                {
-                        "name": "tutor",
-                        "pass": "1234"
-                },    
+  "tutor":
+              {
+                      "name": "tutor",
+                      "pass": "1234"
+              },    
 
-    "alumno":
-                {
-                        "name": "alumna",
-                        "pass": "1234"
-                },
-    
-    "superadmin":
-                {
-                        "name": "sadmin",
-                        "pass": "1234"
-                },
-    
-    "auditor":
-                {
-                        "name": "auditor",
-                        "pass": "1234"
-                }
+  "alumno":
+              {
+                      "name": "alumna",
+                      "pass": "1234"
+              },
+  
+  "superadmin":
+              {
+                      "name": "sadmin",
+                      "pass": "1234"
+              },
+  
+  "auditor":
+              {
+                      "name": "auditor",
+                      "pass": "1234"
+              }
 }     

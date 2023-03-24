@@ -45,7 +45,7 @@ class AdminPage
             evaluationsLink: ()=>{ return cy.contains('Evaluaciones') },
             deliveryOfCaseStudiesLink: ()=>{ return cy.contains('Entrega de casos prácticos') }
         },
-        //configuration (congiguración)
+        //configuration (configuración)
         configuration:{
             teachingCentersLink : () => cy.get('#list-centros > .subtitle-dashboard'),
             callsLink: ()=>{ return cy.contains('Convocatorias') },
@@ -62,4 +62,4 @@ class AdminPage
     }
 }
 
-export default new AdminPage()
+module.exports = new AdminPage()

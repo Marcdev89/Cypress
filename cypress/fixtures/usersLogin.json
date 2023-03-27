@@ -8,7 +8,7 @@
     },
     {
         "type":"teacher",
-        "username": "james",
+        "username": "tutor",
         "password": "1234",
         "expected": "Tutor",
         "path": "inicio-tutor"
@@ -22,7 +22,7 @@
     },
     {
         "type":"auditor",
-        "username": "fer",
+        "username": "auditor",
         "password": "1234",
         "expected": "Auditor",
         "path": "inicio-auditor"

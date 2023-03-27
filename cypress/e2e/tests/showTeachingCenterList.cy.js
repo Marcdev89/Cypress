@@ -8,9 +8,7 @@ describe('Show teaching centers list',function(){
 
     beforeEach(function(){
         LoginPage.login(user.admin.name, user.admin.pass)
-        cy.wait(4000)
         DashboardPage.elements.nCampusCard.nCampus().click()
-        cy.wait(2500)
         AdminPage.elements.configuration.teachingCentersLink().click()
     })
 

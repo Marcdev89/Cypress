@@ -57,5 +57,5 @@
 //  })
 
  Cypress.Commands.add('textfield', (field, newtext)=>{
-    cy.get(field).clear().type(newtext)
+    field.clear().type(newtext)
  })

@@ -29,4 +29,3 @@ describe("Create new AF", () => {
     AAFFPage.isOnDB(NewAFPage.code);
   });
 });
-ls

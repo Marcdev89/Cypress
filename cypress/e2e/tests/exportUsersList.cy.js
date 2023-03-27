@@ -1,9 +1,7 @@
 import LoginPage from "../pagesObject/LoginPage";
 import user from "../../fixtures/userTypes.json";
 import DashboardPage from "../pagesObject/DashboardPage";
-import ListUsersPage, {
-  formatDownloadFileName,
-} from "../pagesObject/ListUsersPage";
+import ListUsersPage from "../pagesObject/ListUsersPage";
 
 describe("Exports users list", () => {
   beforeEach(() => {

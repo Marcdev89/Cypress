@@ -1,3 +1,4 @@
+import user from "../../fixtures/userTypes.json"
 import LoginPage from "../pagesObject/LoginPage"
 import DashboardPage from "../pagesObject/DashboardPage"
 import TeachingCentersPage from "../pagesObject/TeachingCentersPage"
@@ -6,7 +7,7 @@ import AdminPage from "../pagesObject/AdminPage"
 describe('Show teaching centers list',function(){
 
     beforeEach(function(){
-        LoginPage.login('administradorQA', 'W#m0EB3%7Occ')
+        LoginPage.login(user.admin.name, user.admin.pass)
         cy.wait(4000)
         DashboardPage.elements.nCampusCard.nCampus().click()
         cy.wait(2500)

@@ -1,19 +1,27 @@
 import usersLogin from '../../fixtures/usersLogin.json';
 import LoginPage from "../pagesObject/LoginPage";
 
-//alumno first time /informacion-general -- since next --> /formacion  (before belong a group: /mis-cursos)
-
 describe('Login with different roles', () => { 
 
-        usersLogin.map((e)=>{
+        usersLogin.map((e)=>{         
             it(`'Login as a ${e.type} rol`, () => {
-                LoginPage.login(e.username,e.password)           
-                cy.url().should('include', e.path)
+                LoginPage.login(e.username,e.password)
+                e.username === 'alumna' 
+                ? 
+                               cy.url().then(url => {
+                                url.includes('mis-cursos') ? e.path = 'mis-cursos' 
+                                :                          
+                                url.includes('informacion-general') ? e.path = 'informacion-general' 
+                                :                             
+                                cy.url().should('include', e.path)
+                                })
+                : 
+                            cy.url().should('include', e.path)
                 cy.contains(e.expected, { matchCase: false })              
+            })
+         
             });
-        })
-    })
-
+        })   
 
 describe('Login fails', ()=>{
 
@@ -33,6 +41,4 @@ describe('Login fails', ()=>{
         LoginPage.elements.errorAlert().should('have.text', 'Faltan datos obligatorios')
     })
 
-
 })
-

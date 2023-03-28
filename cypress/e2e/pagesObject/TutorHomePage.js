@@ -1,6 +1,6 @@
 class TutorHomePage {
 
-    /* LOCALIZATIONS */
+    /* LOCATORS */
 
     elements = {
 
@@ -28,14 +28,14 @@ class TutorHomePage {
     
                         menu : {
                                 communications : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(1) > img'),
-                                content : () => cy.get('[title="Contenidos"]'),
-                                followUp : () => cy.get('[title="Seguimiento de alumnos"]'),
-                                tutorials : () => cy.get('[title="Tutorías"]'),
-                                calendar : () => cy.get('[title="Calendario"]'),
-                                mail : () => cy.get('[title="Correo"]'),
-                                notifications : () => cy.get('[title="Notificaciones"]'),
-                                participants : () => cy.get('[title="Participantes"]'),
-                                classRoom : () => cy.get('[title="Aula"]')
+                                content : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(2) > img'),
+                                followUp : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(3) > img'),
+                                tutorials : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(4) > img'),
+                                calendar : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(5) > img'),
+                                mail : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(6) > img'),
+                                notifications : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(7) > img'),
+                                participants : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(8) > img'),
+                                classRoom : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(9) > img')
                         }
         }
     }
@@ -46,4 +46,4 @@ class TutorHomePage {
 
 }
 
-module.exports = new TutorHomePage();
+export default new TutorHomePage();

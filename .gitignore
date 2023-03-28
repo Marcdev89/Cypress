@@ -34,3 +34,6 @@ cypress/downloads
 
 # Jetbrains
 .idea
+
+# eslint
+.eslintrc.json

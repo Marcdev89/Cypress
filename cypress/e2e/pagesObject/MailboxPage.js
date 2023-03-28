@@ -35,6 +35,7 @@ class MailboxPage
         manageFoldersModal:{ //checked
             cancelBtn: ()=> cy.get(''),
             removeFolderBtn_nb: (nb)=> cy.get('#listadoCarpetas > .folder-first-text > [alt="Eliminar"]').eq(nb),
+            removeFolderBtn_name: (name)=> cy.get(`#listadoCarpetas > .folder-first-text [title="${name}"]`).siblings('[alt="Eliminar"]'),
             yesBtn: ()=> cy.get('#modalConfirmar .modal-body [data-field="si"]'),
             noBtn: ()=> cy.get('#modalConfirmar .modal-body [data-field="no"]'),
             closeBtn: ()=> cy.get('#modalConfirmar [aria-label="Close"]')
@@ -83,7 +84,11 @@ class MailboxPage
                 specialCharBtn: ()=> cy.get('[aria-label="Carácter especial"]'),
                 emojisBtn: ()=> cy.get('[aria-label="Emojis"]'),
                 horizontalLineBtn: ()=> cy.get('[aria-label="Línea horizontal"]'),
-                insertDateTimeBtn: ()=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn'),
+                dateTime:{
+                    insertBtn: ()=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn').eq(0),
+                    openFormatChoice: ()=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn').eq(1),
+                    //chooseAndInsertFormat_nb: (nb)=> cy.get()
+                }
                 //insertDateTimeOption_nb: (nb)=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn')
                 /*
                 copyBtn: ()=> cy.get('[aria-label="Copiar"]'),

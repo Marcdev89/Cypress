@@ -30,4 +30,4 @@ class FollowUpCommunicationsPage{
 
 }
 
-module.exports = new FollowUpCommunicationsPage();
+export default new FollowUpCommunicationsPage();

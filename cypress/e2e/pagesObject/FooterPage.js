@@ -5,4 +5,4 @@ powered = () => cy.contains('Powered by Vértice',  { matchCase: false });
 
 }
 
-module.exports = new FooterPage();
+export default new FooterPage();

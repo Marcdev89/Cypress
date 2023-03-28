@@ -1,7 +1,7 @@
 class AdminPage
 {
     elements = {
-        //courses (cursos)
+
         courses:{
             formativeActionsLink: ()=>{ return cy.contains('Acciones formativas') },
             formativeModulesLink: ()=>{ return cy.contains('Módulos formativos') },
@@ -9,7 +9,7 @@ class AdminPage
             didacticUnitsLink: ()=>{ return cy.contains('Unidades didácticas') },
             formativeActionsCalendarLink: ()=>{ return cy.contains('Calendario acciones formativas') }
         },
-        //contents (contenidos)
+
         contents:{
             interactiveContentsLink: ()=>{ return cy.contains('Contenidos interactivos') },
             resourcesLink: ()=>{ return cy.contains('Recursos') },
@@ -19,7 +19,7 @@ class AdminPage
             evaluationTestsQuestionsLink:()=>{ return cy.contains('Preg. pruebas de evaluación') },
             tasksLink:()=>{ return cy.contains('Tareas') }
         },
-        //groups (grupos)
+
         groups:{
             groupsLink: ()=>{ return cy.contains('Grupos') },
             workGroupsLink: ()=>{ return cy.contains('Grupos de trabajo') },
@@ -27,7 +27,7 @@ class AdminPage
             usersListLink: ()=>{ return cy.contains('Listado usuarios') },
             profilesLink: ()=>{ return cy.contains('Perfiles') }
         },
-        //communications (comunicaciones)
+
         communications:{
             tutorialsLink: ()=>{ return cy.contains('Tutorías') },
             faceToFaceDumpTutorialsLink: ()=>{ return cy.contains('Volcado tutorías presenciales') },
@@ -36,7 +36,7 @@ class AdminPage
             chatsLink: ()=>{ return cy.contains('Chats') },
             followUpCommunicationsLink: ()=>{ return cy.contains('Seguimiento comunicaciones') }
         },
-        //follow-up (seguimiento)
+
         followup:{
             followUpStudentProgressLink: ()=>{ return cy.contains('Seguimiento y progresos de alumnos') },
             followUpTasksLink: ()=>{ return cy.contains('Seguimiento de tareas') },
@@ -45,7 +45,7 @@ class AdminPage
             evaluationsLink: ()=>{ return cy.contains('Evaluaciones') },
             deliveryOfCaseStudiesLink: ()=>{ return cy.contains('Entrega de casos prácticos') }
         },
-        //configuration (configuración)
+
         configuration:{
             teachingCentersLink : () => cy.get('#list-centros > .subtitle-dashboard'),
             callsLink: ()=>{ return cy.contains('Convocatorias') },
@@ -54,7 +54,7 @@ class AdminPage
             followUpStudentConfigLink: ()=>{ return cy.contains('Config. seguimiento alumnos') }
         },
         icons:{
-        //icon (iconos)
+
             mailLink: ()=>{ return cy.get('[data-original-title="Correo"]') },
             calendarLink: ()=>{ return cy.get('[data-original-title="Calendario"]') },
             ayudaLink: ()=>{ return cy.get('[data-original-title="Ayuda adicional"]') }
@@ -62,4 +62,4 @@ class AdminPage
     }
 }
 
-module.exports = new AdminPage()
+export default new AdminPage()

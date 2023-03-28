@@ -60,4 +60,4 @@ class LoginPage{
     }
 }
 
-module.exports = new LoginPage();
+export default new LoginPage();

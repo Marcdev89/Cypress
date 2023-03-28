@@ -1,5 +1,3 @@
-import HeaderPage from "./HeaderPage";
-
 class MyProfilePage {
   // LOCATORS
   elements = {
@@ -55,4 +53,4 @@ class MyProfilePage {
 
 }
 
-module.exports = new MyProfilePage();
+export default new MyProfilePage();

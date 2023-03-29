@@ -1,6 +1,6 @@
 class TutorHomePage {
 
-    /* LOCALIZATIONS */
+    /* LOCATORS */
 
     elements = {
 
@@ -46,4 +46,4 @@ class TutorHomePage {
 
 }
 
-module.exports = new TutorHomePage();
+export default new TutorHomePage();

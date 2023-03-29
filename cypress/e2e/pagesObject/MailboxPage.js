@@ -13,7 +13,7 @@ class MailboxPage
             trash: ()=> cy.get('#carpetas').eq(2),
             newFolder: ()=> cy.get('.row > [title="Nueva carpeta"]'),
             manageFolders: ()=> cy.get('.row > [title="Gestionar carpetas"]'),
-            createdFolder: (name)=>cy.get(`#carpetas img[title="${name}"]`).parent()
+            createdFolder: (name)=>cy.get(`#carpetas img[title="${name}"]`)//.parent()
         },
         searchInput: ()=> cy.get('#buscarCorreo'),
         searchBtn: ()=> cy.get('#fBusquedaCorreo button'),

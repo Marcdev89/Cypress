@@ -24,8 +24,7 @@ class AAFFPage {
     },
 
     alerts: {
-      modalDelete: () =>
-        cy.get("#modalConfirmar > .modal-dialog > .modal-content"),
+      modalDelete: () => cy.get("#modalConfirmar > .modal-dialog > .modal-content"),
       modalDeleteYesButton: () => cy.get('[data-field="si"]'),
       modalDeleteNoButton: () => cy.get('[data-field="no"]'),
       modalAcceptButton: () => cy.get("#modalExito").find(".btn"),

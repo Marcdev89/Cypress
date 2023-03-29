@@ -37,7 +37,7 @@
 // import LocatorsMyInfoPage from '../e2e/LocatorsMyInfoPage'
 
 
-// Cypress.Commands.add('login', (Username, password, title) => { 
+// Cypress.Commands.add('login', (Username, password, title) => {
     
 //     const locators = new LocatorsLoginPage()
 //     locators.url()
@@ -56,6 +56,31 @@
 //     //cy.get(oldtext).should('have.text', newtext)
 //  })
 
- Cypress.Commands.add('textfield', (field, newtext)=>{
-    field.clear().type(newtext)
+// Types on a textfield
+Cypress.Commands.add('textfield', (field, newtext) => {
+   field.clear().type(newtext)
  })
+ 
+ // Pick choice on a select
+ Cypress.Commands.add('pickOnSelect', (locatorSelect, locatorOptions, itemPosition) => {
+   locatorSelect.click();
+   locatorOptions.eq(itemPosition).click()
+ })
+  
+ // Gets iframe body
+ Cypress.Commands.add('getIframeBody', (locator) => {
+   locator
+     .its('0.contentDocument.body')
+     .should('be.visible')
+     .then(cy.wrap);
+ })
+ 
+ // Types on iframe body
+ Cypress.Commands.add('typeOnIframe', (locator, text) => {
+   locator
+     .its('0.contentDocument.body')
+     .should('be.visible')
+     .then(cy.wrap)
+     .clear()
+     .type(text);
+ });

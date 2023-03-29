@@ -6,6 +6,7 @@ module.exports = defineConfig({
   // Cypress browser width&height
   viewportWidth: 1920,
   viewportHeight: 1080,
+  "chromeWebSecurity": false,
   
   e2e: {
     // experimentalSessionAndOrigin:true,

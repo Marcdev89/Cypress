@@ -25,4 +25,4 @@ class TutorCommunicationsPage{
 
 }
 
-module.exports = new TutorCommunicationsPage();
+export default new TutorCommunicationsPage();

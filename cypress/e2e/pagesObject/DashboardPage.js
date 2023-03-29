@@ -1,5 +1,5 @@
 class DashboardPage {
-  /* LOCALIZATIONS */
+  /* LOCATORS */
 
   elements = {
     title: () => cy.get(".title no-margin"),
@@ -42,5 +42,4 @@ class DashboardPage {
 
   url = () => cy.visit("inicio-dashboard");
 }
-
-module.exports = new DashboardPage();
+export default new DashboardPage();

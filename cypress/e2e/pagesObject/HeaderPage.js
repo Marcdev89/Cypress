@@ -32,4 +32,4 @@ class HeaderPage {
 
 
 
-module.exports = new HeaderPage();
+export default new HeaderPage();

@@ -84,3 +84,7 @@ Cypress.Commands.add('textfield', (field, newtext) => {
      .clear()
      .type(text);
  });
+
+ Cypress.Commands.add('alertAssert',(text)=>{
+   cy.get('.snackbar-alert').should('have.text',text)
+ })

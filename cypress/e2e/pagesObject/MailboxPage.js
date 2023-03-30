@@ -1,6 +1,9 @@
+import TinyTextEditor from "../pagesObject/TinyTextEditor"
+
 class MailboxPage
 {
     elements = {
+        textEditor: new TinyTextEditor('#enviarCorreo'),
         breadCrumb: {
             home:()=> cy.get('.breadcrumb > :nth-child(1) > .link'),
             group:()=> cy.get('#grupo'),
@@ -75,116 +78,6 @@ class MailboxPage
             },
             externCopyCheckbox: ()=> cy.get('#copiaExterna'), //to check
             receiptAcknowledgmentCheckBox: ()=> cy.get('#acuseRecibo'), //to check
-            textEditor:{
-                previewBtn: ()=> cy.get('#enviarCorreo [aria-label="Previsualizar"]'),
-                undoBtn: ()=> cy.get('#enviarCorreo [aria-label="Deshacer"]'),
-                redoBtn: ()=> cy.get('#enviarCorreo [aria-label="Rehacer"]'),
-                cutBtn: ()=> cy.get('#enviarCorreo [aria-label="Cortar"]'),
-                copyBtn: ()=> cy.get('#enviarCorreo [aria-label="Copiar"]'),
-                pasteBtn: ()=> cy.get('#enviarCorreo [aria-label="Pegar"]'),
-                selectAllBtn: ()=> cy.get('#enviarCorreo [aria-label="Seleccionar todo"]'),
-                uploadImageBtn: ()=> cy.get('#enviarCorreo [aria-label="Upload Image"]'),
-                insertEditLinkBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar/editar enlace"]'), //TODO add its modal locator
-                insertEditMediaBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar/editar medio"]'), //TODO add its modal locator
-                specialCharBtn: ()=> cy.get('#enviarCorreo [aria-label="Carácter especial"]'), //TODO add its modal locator
-                emojisBtn: ()=> cy.get('#enviarCorreo [aria-label="Emojis"]'), // TODO add its modal locator
-                horizontalLineBtn: ()=> cy.get('#enviarCorreo [aria-label="Línea horizontal"]'),
-                dateTime:{ //checked
-                    insertBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar fecha/hora"] > .tox-tbtn').eq(0),
-                    openFormatChoice: ()=> cy.get('#enviarCorreo [aria-label="Insertar fecha/hora"] > span.tox-tbtn').eq(1),
-                    chooseAndInsertFormat_nb: (nb)=> cy.get('.tox-silver-sink .tox-collection__group > div').eq(nb)
-                },
-                pageBreakBtn: ()=> cy.get('#enviarCorreo [aria-label="Salto de página"]'),
-                helpBtn: ()=> cy.get('#enviarCorreo [aria-label="Ayuda"]'), // TODO add its modal locator
-                boldBtn: ()=> cy.get('#enviarCorreo [aria-label="Negrita"]'),
-                italicBtn: ()=> cy.get('#enviarCorreo [aria-label="Cursiva"]'),
-                underlineBtn: ()=> cy.get('#enviarCorreo [aria-label="Subrayado"]'),
-                lineThroughBtn: ()=> cy.get('#enviarCorreo [aria-label="Tachado"]'),
-                superscriptBtn: ()=> cy.get('#enviarCorreo [aria-label="Superíndice"]'),
-                subscriptBtn: ()=> cy.get('#enviarCorreo [aria-label="Subíndice"]'),
-                lineHeight:{
-                    openFormatChoice: ()=> cy.get('#enviarCorreo [aria-label="Altura de línea"]'),
-                    chooseFormat_nb: (nb)=> cy.get('.tox-silver-sink .tox-collection__group > div').eq(nb)
-                },
-                fontFamily:{
-                    openFormatChoice: ()=> cy.get('#enviarCorreo [aria-label="Fuentes"]'),
-                    chooseFormat_nb: (nb)=> cy.get('.tox-silver-sink .tox-collection__group > div').eq(nb)
-                },
-                fontSize:{
-                    openFormatChoice: ()=> cy.get('#enviarCorreo [aria-label="Tamaños de fuente"]'),
-                    chooseFormat_nb: (nb)=> cy.get('.tox-silver-sink .tox-collection__group > div').eq(nb)
-                },
-                paragraphStyle:{ //to check
-                    openFormatChoice: ()=> cy.get('#enviarCorreo [aria-label="Bloques"]'),
-                    chooseFormat_nb: (nb)=> cy.get('.tox-silver-sink .tox-collection__group > div').eq(nb)
-                },
-                fontColor:{ // to check
-                    applyBtn: ()=> cy.get('#enviarCorreo [aria-label="Color del texto"] > .tox-tbtn').eq(0),
-                    openChoices: ()=> cy.get('#enviarCorreo [aria-label="Color del texto"] > span.tox-tbtn').eq(1),
-                    chooseAndapply_color: (color)=> cy.get(`.tox-silver-sink > .tox-swatches > .tox-swatches__row > [title="${color}"]`),
-                    customColor: ()=> cy.get('.tox-silver-sink > .tox-swatches > .tox-swatches__row > [title="Color personalizado"]')
-                    /*
-                    possible values of color:
-                        'Verde claro', 'Amarillo claro', 'Rojo claro', 'Morado claro', 'Azul claro'
-                        'Verde', 'Amarillo', 'Rojo', 'Púrpura', 'Azul'
-                        'Turquesa oscuro', 'Naranja', 'Rojo oscuro', 'Morado oscuro', 'Azul oscuro'
-                        'Gris claro', 'Gris medio', 'Gris', 'Gris oscuro', 'Azul marino'
-                        'Negro', 'Blanco', 'Quitar color', 'Color personalizado'
-                    */
-                },
-                backgroundColor:{ // to check
-                    applyBtn: ()=> cy.get('#enviarCorreo [aria-label="Color de fondo"] > .tox-tbtn').eq(0),
-                    openChoices: ()=> cy.get('#enviarCorreo [aria-label="Color de fondo"] > span.tox-tbtn').eq(1),
-                    chooseAndapply_color: (color)=> cy.get(`.tox-silver-sink > .tox-swatches > .tox-swatches__row > [title="${color}"]`),
-                    customColor: ()=> cy.get('.tox-silver-sink > .tox-swatches > .tox-swatches__row > [title="Color personalizado"]')
-                    /*
-                    possible values of color:
-                        'Verde claro', 'Amarillo claro', 'Rojo claro', 'Morado claro', 'Azul claro'
-                        'Verde', 'Amarillo', 'Rojo', 'Púrpura', 'Azul'
-                        'Turquesa oscuro', 'Naranja', 'Rojo oscuro', 'Morado oscuro', 'Azul oscuro'
-                        'Gris claro', 'Gris medio', 'Gris', 'Gris oscuro', 'Azul marino'
-                        'Negro', 'Blanco', 'Quitar color', 'Color personalizado'
-                    */
-                },
-                clearFormatBtn: ()=> cy.get('#enviarCorreo [aria-label="Limpiar formato"]'),
-                sourceCodeBtn: ()=> cy.get('#enviarCorreo [aria-label="Código fuente"]'),
-                alignLeftBtn: ()=> cy.get('#enviarCorreo [aria-label="Alinear a la izquierda"]'),
-                alignCenterBtn: ()=> cy.get('#enviarCorreo [aria-label="Alinear al centro"]'),
-                alignRightBtn: ()=> cy.get('#enviarCorreo [aria-label="Alinear a la derecha"]'),
-                justifyBtn: ()=> cy.get('#enviarCorreo [aria-label="Justificar"]'),
-                bulletList:{ // to check
-                    applyBtn: ()=> cy.get('#enviarCorreo [aria-label="Lista de viñetas"] > .tox-tbtn').eq(0),
-                    openChoices: ()=> cy.get('#enviarCorreo [aria-label="Lista de viñetas"] > span.tox-tbtn').eq(1),
-                    chooseAndapply_name: (name)=> cy.get(`.tox-silver-sink .tox-collection__group > [title="${name}"]`),
-                    /*
-                    possible values of name:
-                        'Por defecto', 'Círculo', 'Cuadrado'
-                    */
-                },
-                numberedList:{ // to check
-                    applyBtn: ()=> cy.get('#enviarCorreo [aria-label="Lista numerada"] > .tox-tbtn').eq(0),
-                    openChoices: ()=> cy.get('#enviarCorreo [aria-label="Lista numerada"] > span.tox-tbtn').eq(1),
-                    chooseAndapply_name: (name)=> cy.get(`.tox-silver-sink .tox-collection__group > [title="${name}"]`),
-                    /*
-                    possible values of name:
-                        'Por defecto', 'Letras minúsculas', 'Griego en minúsculas'
-                        'Romano en minúsculas', 'Letras mayúsculas', 'Romano en mayúsculas'
-                    */
-                },
-                decreaseIndentBtn: ()=> cy.get('#enviarCorreo [aria-label="Disminuir sangría"]'),
-                increaseIndentBtn: ()=> cy.get('#enviarCorreo [aria-label="Incrementar sangría"]'),
-                insertTable: ()=> cy.get('#enviarCorreo [aria-label="Tabla"]'), //TODO menu
-                removeTableBtn: ()=> cy.get('#enviarCorreo [aria-label="Eliminar tabla"]'),
-                tablePropertiesBtn: ()=> cy.get('#enviarCorreo [aria-label="Propiedades de la tabla"]'),
-                rowPropertiesBtn: ()=> cy.get('#enviarCorreo [aria-label="Propiedades de la fila"]'),
-                cellPropertiesBtn: ()=> cy.get('#enviarCorreo [aria-label="Propiedades de la celda"]'),
-                insertRowBeforeBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar fila antes"]'),
-                insertRowAfterBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar fila después"]'),
-                removeRowBtn: ()=> cy.get('#enviarCorreo [aria-label="Eliminar fila"]'),
-                insertColBeforeBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar columna antes"]'),
-                insertColAfteBtn: ()=> cy.get('#enviarCorreo [aria-label="Insertar columna después"]'),
-                removeColBtn: ()=> cy.get('#enviarCorreo [aria-label="Eliminar columna"]'),
-            },
             cancelBtn: ()=> cy.get('#enviar').siblings('[title="Cancelar"]'), //to check
             sendBtn: ()=> cy.get('#enviar') //to check
         }

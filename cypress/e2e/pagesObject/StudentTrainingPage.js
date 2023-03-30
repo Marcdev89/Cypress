@@ -42,4 +42,4 @@ class StudentTrainingPage
     }
 }
 
-export default new tudentTrainingPage();
+export default new StudentTrainingPage();

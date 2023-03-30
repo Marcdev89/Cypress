@@ -25,7 +25,7 @@ describe("Delete AF", () => {
     AAFFPage.deleteRowByCode(NewAFPage.code);
   });
 
-  it.only("An AF assigned to a group cannot be deleted", () => {
+  it("An AF assigned to a group cannot be deleted", () => {
     AAFFPage.deleteAFWithGroupAssigned(AAFFPage.AFWithGroupAssigned.code);
   });
 });

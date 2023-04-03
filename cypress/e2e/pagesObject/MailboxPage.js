@@ -27,8 +27,27 @@ class MailboxPage
         markAsUnreadIcon: ()=> cy.get('[title="Marcar como no leído"]'),
         selectAllCheckbox: ()=> cy.get('#table [name="btSelectAll"]'),
         mailList:{
+            self: ()=> cy.get('#table > tbody > tr'),
             checkbox_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb).find('.bs-checkbox > input'),
-            mail_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb)
+            mail_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb),
+            mail_infos: (group, from, subject)=> {
+                let i = 0
+                let mail_text = ''
+                let match = true
+                let end = false
+                while(!end)
+                {
+                    mail_text = Cypress.$(Cypress.$('#table > tbody > tr')[i]).text()
+                    cy.log('MAIL CONVERT TO => '+mail_text)
+                    match = new RegExp(from).test(mail_text)
+                    match &= new RegExp(group).test(mail_text)
+                    match &= new RegExp(subject).test(mail_text)
+                    if(match){ return  cy.get('#table > tbody > tr').eq(i)}
+                    i++
+                    if(mail_text===''){ end=true }
+                }
+                return  cy.get('#table > tbody > tr').eq(i)
+            }
         },
         newFolderModal:{
             nameInput: ()=> cy.get('#newFolder .modal-body input',{timeout:8000}),

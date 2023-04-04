@@ -16,7 +16,7 @@ describe("Create new AF", () => {
     NewAFPage.newWithoutRequiredFieldCode();
     NewAFPage.newWithoutRequiredFieldName();
     NewAFPage.newWithoutRequiredFieldModality();
-    AAFFPage.isNotOnDB(NewAFPage.code);
+    AAFFPage.searchIfNotOnDB(NewAFPage.code);
   });
 
   it("New AF with only required fields", () => {

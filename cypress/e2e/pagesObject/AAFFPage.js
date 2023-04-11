@@ -80,6 +80,9 @@ class AAFFPage {
         this.elements.alerts.modalAcceptButton().click({ force: true });
       });
   }
+
+  url= () => cy.visit('acciones-formativas')
+
 }
 
 export default new AAFFPage();

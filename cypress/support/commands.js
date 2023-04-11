@@ -72,6 +72,18 @@ Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, valu
   }
 );
 
+/**
+ * Click select option by value
+ * {function} locatorSelect ( ej. ()=>{ return get('anything') } )
+ * {function} locatorOptions
+ * {string} value
+ */
+Cypress.Commands.add("clickSelectOption", (locatorSelect, locatorOptions, value) => {
+  locatorSelect().should('be.visible').click();
+  locatorOptions().contains(value).click();
+}
+);
+
 // Gets iframe body
 Cypress.Commands.add("getIframeBody", (locator) => {
   return cy.get(locator).its('0.contentDocument.body').should('be.visible');

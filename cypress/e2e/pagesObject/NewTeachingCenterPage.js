@@ -40,8 +40,20 @@ class NewTeachingCenterPage
         }
     }]
 
+    missingDataMess={
+        centerType: 'Tipo de centro',
+        sepe: 'Código SEPE',
+        centerName: 'Nombre del centro',
+        cif: 'CIF',
+        country: 'País',
+        province: 'Provincia',
+        contactEmail: 'Email',
+        contactPhone: 'Teléfono'
+    }
+
     elements = {
         url:'nuevo-centro',
+        urlEdit:'editar-centro',
         centerTypeSelect:{
             open: ()=> cy.get('[data-id="tipoCentro"]'),
             option: (name)=> cy.clickSelectOption(
@@ -94,14 +106,15 @@ class NewTeachingCenterPage
         contactPhoneInput:()=> cy.get('#telefonoContactoCentro'),
         saveBtn:()=> cy.get('#guardarCentro'),
         cancelBtn:()=> this.elements.saveBtn().siblings('[title="Cancelar"]'),
-        succesModal:()=> cy.get('#cuerpoModal')
+        succesModal:()=> cy.get('#cuerpoModal'),
+        succesModalBtn:()=> cy.get('#modalExito > .modal-dialog > .modal-content > .modal-body > form > .card > .card-footer-modal > .btn')
     }
 
     fillCreateCenterFormAnd(click="save",data_set=0)
     {
         if(typeof(data_set)!=='object')
         {
-            data_set = Object.assign(this.creationData[data_set].required, this.creationData[data_set].other)
+            data_set = Object.assign({},this.creationData[data_set].required, this.creationData[data_set].other)
         }
         
         this.elements.centerTypeSelect.option(data_set.centerType)
@@ -121,24 +134,6 @@ class NewTeachingCenterPage
         if(click==='save'){ this.elements.saveBtn().click() }
         else if(click==='cancel'){ this.elements.cancelBtn().click() }
         return data_set;
-    }
-
-    shouldFormBeEmpty()
-    {
-        this.elements.centerTypeSelect.open().contains('Seleccione...').should('be.visible')
-        this.elements.sepeInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.nameInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.cifInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.businessNameInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.countrySelect.open().contains('Seleccione...').should('be.visible')
-        this.elements.provinceSelect.open().contains('Seleccione...').should('be.visible')
-        this.elements.localitySelect.open().contains('Seleccione...').should('be.visible')
-        this.elements.roadTypeSelect.open().contains('Seleccione...').should('be.visible')
-        this.elements.postalCodeInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.addressInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.contactPersonInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.contactEmailInput().should('be.visible').invoke('val').and('be.eq','')
-        this.elements.contactPhoneInput().should('be.visible').invoke('val').and('be.eq','')
     }
 
     fillOnlyRequiredFields(nb,click='save',data_set=0)
@@ -180,9 +175,157 @@ class NewTeachingCenterPage
             i++
         }
         
-        this.fillCreateCenterFormAnd(click,Object.assign(required,other_fields))
+        this.fillCreateCenterFormAnd(click,Object.assign({},required,other_fields))
 
         return required_fields_empty
+    }
+
+    fillAllFieldsLess(fieldName, data_set=0)
+    {
+        this.clearForm()
+        let data = Object.assign({}, this.creationData[data_set].required, this.creationData[data_set].other)
+
+        switch(fieldName)
+        {
+            case 'centerType':
+            case 'country':
+                data[fieldName] = 'Seleccione...'
+                data.province = 'Provincia'
+                data.locality = 'Municipio'
+                break
+            case 'roadType':
+                data[fieldName] = 'Seleccione...'
+                break
+            case 'province':
+                data[fieldName] = 'Provincia'
+                data.locality = 'Municipio'
+                break
+            case 'locality':
+                data[fieldName] = 'Municipio'
+                break
+            default:
+                data[fieldName] = '{selectall}{backspace}'
+                break
+        }
+
+        this.fillCreateCenterFormAnd('save',data)
+    }
+
+    clearField(fieldName)
+    {
+        let emptyS = 'Seleccione...'
+        let emptyI = '{selectall}{backspace}'
+        switch(fieldName)
+        {
+            case 'centerType':
+                this.elements.centerTypeSelect.option(emptyS)
+                break
+            case 'sepe':
+                this.elements.sepeInput().type(emptyI)
+                break
+            case 'centerName':
+                this.elements.nameInput().type(emptyI)
+                break
+            case 'cif':
+                this.elements.cifInput().type(emptyI)
+                break
+            case 'businessName':
+                this.elements.businessNameInput().type(emptyI)
+                break
+            case 'country':
+                this.elements.countrySelect.option(emptyS)
+                this.elements.provinceSelect.option('Provincia')
+                this.elements.localitySelect.option('Municipio')
+                break
+            case 'province':
+                this.elements.provinceSelect.option(emptyS)
+                this.elements.localitySelect.option('Municipio')
+                break
+            case 'locality':
+                this.elements.localitySelect.option('Municipio')
+                break
+            case 'roadType':
+                this.elements.centerTypeSelect.option(emptyS)
+                break
+            case 'postalCode':
+                this.elements.postalCodeInput().type(emptyI)
+                break
+            case 'address':
+                this.elements.addressInput().type(emptyI)
+                break
+            case 'contactPerson':
+                this.elements.contactPersonInput().type(emptyI)
+                break
+            case 'contactEmail':
+                this.elements.contactEmailInput().type(emptyI)
+                break
+            case 'contactPhone':
+                this.elements.contactPhoneInput().type(emptyI)
+                break
+            default:
+                this.elements.
+                break
+        }
+    }
+
+    clearForm()
+    {
+        let emptyI = '{selectall}{backspace}'
+        let emptyS = 'Seleccione...'
+        let data = {
+            centerType: emptyS,
+            sepe: emptyI,
+            centerName: emptyI,
+            cif: emptyI,
+            country: emptyS,
+            province: 'Provincia',
+            contactEmail: emptyI,
+            contactPhone: emptyI,
+            businessName: emptyI,
+            locality: 'Municipio',
+            roadType: emptyS,
+            postalCode: emptyI,
+            address: emptyI,
+            contactPerson: emptyI
+        }
+        this.fillCreateCenterFormAnd('no_submit',data)
+    }
+
+    shouldFormBeEmpty()
+    {
+        this.elements.centerTypeSelect.open().contains('Seleccione...').should('be.visible')
+        this.elements.sepeInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.nameInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.cifInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.businessNameInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.countrySelect.open().contains('Seleccione...').should('be.visible')
+        this.elements.provinceSelect.open().contains('Seleccione...').should('be.visible')
+        this.elements.localitySelect.open().contains('Seleccione...').should('be.visible')
+        this.elements.roadTypeSelect.open().contains('Seleccione...').should('be.visible')
+        this.elements.postalCodeInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.addressInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.contactPersonInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.contactEmailInput().should('be.visible').invoke('val').and('be.eq','')
+        this.elements.contactPhoneInput().should('be.visible').invoke('val').and('be.eq','')
+    }
+
+    shouldFormBeFilled(data_set=0)
+    {
+        let timeout = { timeout:8000}
+        this.elements.centerTypeSelect.open().contains(this.creationData[data_set].required.centerType).should('be.visible')
+        this.elements.sepeInput().should('be.visible').invoke(timeout, 'val').and('be.eq',this.creationData[data_set].required.sepe)
+        this.elements.nameInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.centerName)
+        this.elements.cifInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.cif)
+        this.elements.businessNameInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].other.businessName)
+        this.elements.countrySelect.open().contains(this.creationData[data_set].required.country).should('be.visible')
+        this.elements.provinceSelect.open().contains(this.creationData[data_set].required.province).should('be.visible')
+        this.elements.localitySelect.open().contains(this.creationData[data_set].other.locality).should('be.visible')
+        this.elements.roadTypeSelect.open().contains(this.creationData[data_set].other.roadType).should('be.visible')
+        this.elements.postalCodeInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].other.postalCode)
+        this.elements.addressInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].other.address)
+        this.elements.contactPersonInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].other.contactPerson)
+        this.elements.contactEmailInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.contactEmail)
+        this.elements.contactPhoneInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.contactPhone)
     }
 }
 export default new NewTeachingCenterPage()

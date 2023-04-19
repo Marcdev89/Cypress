@@ -21,22 +21,6 @@ class LoginPage{
 
     }
 
-    typeUsername(username){
-        this.elements.usernameInput().type(username);
-    }
-
-    typePassword(password){
-        this.elements.passwordInput().type(password);
-    }
-
-    clickLogin(){
-        this.elements.loginBtn().click();
-    }
-
-    submitLogin(){
-        this.elements.formLogin().submit();
-    }
-
     login(username, password){
         cy.intercept({
             url:'*', method: 'POST'},(req)=>{

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 require('dotenv').config()
 
 const { defineConfig } = require("cypress");

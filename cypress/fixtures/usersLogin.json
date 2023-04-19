@@ -1,36 +1,36 @@
 [
     {
         "type":"administrator",
-        "username": "administradorQA",
-        "password": "W#m0EB3%7Occ",
+        "username": "adminCampus",
+        "password": "campus",
         "expected": "Administrador",
         "path": "inicio-dashboard"
     },
     {
         "type":"teacher",
-        "username": "tutor",
-        "password": "1234",
+        "username": "tutorCampus",
+        "password": "campus",
         "expected": "Tutor",
         "path": "inicio-tutor"
     },
     {
         "type":"student",
-        "username": "alumna",
-        "password": "1234",
+        "username": "alumnoCampus",
+        "password": "campus",
         "expected": "Alumno",
         "path": "formacion"
     },
     {
         "type":"auditor",
-        "username": "auditor",
-        "password": "1234",
+        "username": "auditorCampus",
+        "password": "campus",
         "expected": "Auditor",
         "path": "inicio-auditor"
     },
     {
         "type":"superadmin",
-        "username": "sadmin",
-        "password": "admin1234",
+        "username": "sadminCampus",
+        "password": "campus",
         "expected": "Superadministrador",
         "path": "inicio-superadmin"
     }

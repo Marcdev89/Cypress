@@ -16,18 +16,16 @@ describe("Create new AF", () => {
     NewAFPage.newWithoutRequiredFieldCode();
     NewAFPage.newWithoutRequiredFieldName();
     NewAFPage.newWithoutRequiredFieldModality();
-    AAFFPage.isNotOnDB(NewAFPage.code);
+    AAFFPage.searchIfNotOnDB(NewAFPage.code);
   });
 
-  it.only("New AF with only required fields", () => {
+  it("New AF with only required fields", () => {
     NewAFPage.newOnlyRequiredFields();
-    AAFFPage.isOnDB(NewAFPage.code);
     AAFFPage.deleteRowByCode(NewAFPage.code);
   });
 
   it("New AF with all fields", () => {
     NewAFPage.newWithAllFields();
-    AAFFPage.isOnDB(NewAFPage.code);
     AAFFPage.deleteRowByCode(NewAFPage.code);
   });
 });

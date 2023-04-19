@@ -22,14 +22,14 @@
     },
     {
         "type":"auditor",
-        "username": "auditor",
+        "username": "auditorCampus",
         "password": "campus",
         "expected": "Auditor",
         "path": "inicio-auditor"
     },
     {
         "type":"superadmin",
-        "username": "sadmin",
+        "username": "sadminCampus",
         "password": "campus",
         "expected": "Superadministrador",
         "path": "inicio-superadmin"

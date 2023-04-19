@@ -4,7 +4,9 @@ import user from "../../fixtures/userTypes.json";
 
 describe('Login with different roles', () => { 
 
-        usersLogin.map((e)=>{         
+        usersLogin.map((e)=>{     
+            //sadmin and auditor are not created yet
+          if (e.username !== 'sadminCampus' && e.username !=='auditorCampus'){
             it(`'Login as a ${e.type} rol`, () => {
                 LoginPage.login(e.username,e.password)
                 // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -23,8 +25,9 @@ describe('Login with different roles', () => {
                 cy.contains(e.expected, { matchCase: false })              
             })
          
-            });
-        })   
+          }
+        });
+})   
 
 describe('Login fails', ()=>{
 

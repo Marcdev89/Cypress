@@ -61,14 +61,14 @@ Cypress.Commands.add("textfield", (field, newtext) => {
 // Pick choice on a select by position
 Cypress.Commands.add("pickOnSelect", (locatorSelect, locatorOptions, itemPosition) => {
     locatorSelect.click({force: true});
-    locatorOptions.eq(itemPosition).click({force: true});
+    locatorOptions.eq(itemPosition).trigger('click');
   }
 );
 
 // Pick choice on a select by value
 Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, value) => {
     locatorSelect.click({force: true});
-    locatorOptions.contains(value).click({force: true});
+    locatorOptions.contains(value).trigger('click');
   }
 );
 

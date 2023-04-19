@@ -26,7 +26,6 @@ describe("Delete AF", () => {
   });
 
   it("An AF assigned to a group cannot be deleted", () => {
-    // TODO WHEN THE DB IS SEEDED WITH COMMON DATA
-    cy.log("TODO WHEN THE DB IS SEEDED WITH COMMON DATA");
+    AAFFPage.deleteAFWithGroupAssigned(AAFFPage.AFWithGroupAssigned.code);
   });
 });

@@ -7,14 +7,10 @@ import AdminPage from "../pagesObject/AdminPage"
 describe('Remove teaching center / Eliminar centro de impartición', function(){
     beforeEach(function(){
         LoginPage.login(user.admin.name, user.admin.pass)
-        cy.wait(4000)
         DashboardPage.elements.nCampusCard.nCampus().click()
-        cy.wait(2500)
         AdminPage.elements.configuration.teachingCentersLink().click()
-        cy.wait(2500)
         TeachingCentersPage.elements.lookAllBtn().click()
-        cy.wait(500)
-        TeachingCentersPage.elements.teachingCentersList().its('length')
+        TeachingCentersPage.elements.teachingCentersList().its('length').should('be.gte',1)
         .then( (completeListLength) => {
             this.completeListLength = completeListLength
         })

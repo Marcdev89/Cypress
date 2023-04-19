@@ -14,7 +14,6 @@
 //         cy.login(user.username,user.password,user.expected)
 //     });
 
-    
 // });
 //
 // -- This is a parent command --
@@ -32,13 +31,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-
 // import LocatorsLoginPage from '../e2e/LocatorsLoginPage'
 // import LocatorsMyInfoPage from '../e2e/LocatorsMyInfoPage'
 
-
 // Cypress.Commands.add('login', (Username, password, title) => {
-    
+
 //     const locators = new LocatorsLoginPage()
 //     locators.url()
 //     locators.fillUsername().type(Username)
@@ -57,34 +54,56 @@
 //  })
 
 // Types on a textfield
-Cypress.Commands.add('textfield', (field, newtext) => {
-   field.clear().type(newtext)
- })
- 
- // Pick choice on a select
- Cypress.Commands.add('pickOnSelect', (locatorSelect, locatorOptions, itemPosition) => {
-   locatorSelect.click();
-   locatorOptions.eq(itemPosition).click()
- })
-  
- // Gets iframe body
- Cypress.Commands.add('getIframeBody', (locator) => {
-   locator
-     .its('0.contentDocument.body')
-     .should('be.visible')
-     .then(cy.wrap);
- })
- 
- // Types on iframe body
- Cypress.Commands.add('typeOnIframe', (locator, text) => {
-   locator
-     .its('0.contentDocument.body')
-     .should('be.visible')
-     .then(cy.wrap)
-     .clear()
-     .type(text);
- });
+Cypress.Commands.add("textfield", (field, newtext) => {
+  field.clear().type(newtext);
+});
 
- Cypress.Commands.add('alertAssert',(text)=>{
-   cy.get('.snackbar-alert').should('have.text',text)
- })
+// Pick choice on a select by position
+Cypress.Commands.add("pickOnSelect", (locatorSelect, locatorOptions, itemPosition) => {
+    locatorSelect.click({force: true});
+    locatorOptions.eq(itemPosition).trigger('click');
+  }
+);
+
+// Pick choice on a select by value
+Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, value) => {
+    locatorSelect.click({force: true});
+    locatorOptions.contains(value).trigger('click');
+  }
+);
+
+/**
+ * Click select option by value
+ * {function} locatorSelect ( ej. ()=>{ return get('anything') } )
+ * {function} locatorOptions
+ * {string} value
+ */
+Cypress.Commands.add("clickSelectOption", (locatorSelect, locatorOptions, value) => {
+  locatorSelect().should('be.visible').click();
+  locatorOptions().contains(value).click();
+}
+);
+
+// Gets iframe body
+Cypress.Commands.add("getIframeBody", (locator) => {
+  return cy.get(locator).its('0.contentDocument.body').should('be.visible');
+});
+
+// Types on iframe body
+Cypress.Commands.add("typeOnIframe", (locator, text) => {
+  locator
+    .its("0.contentDocument.body")
+    .should("be.visible")
+    .then(cy.wrap)
+    .clear()
+    .type(text);
+});
+
+Cypress.Commands.add("alertAssert", (text) => {
+  cy.get(".snackbar-alert").should("have.text", text);
+});
+
+// Attach file
+Cypress.Commands.add("attachFile", (locator, filePath) => {
+  locator.selectFile(filePath, { force: true });
+});

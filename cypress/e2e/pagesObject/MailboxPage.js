@@ -1,6 +1,9 @@
+import TinyTextEditor from "../pagesObject/TinyTextEditor"
+
 class MailboxPage
 {
     elements = {
+        textEditor: new TinyTextEditor('#enviarCorreo'),
         breadCrumb: {
             home:()=> cy.get('.breadcrumb > :nth-child(1) > .link'),
             group:()=> cy.get('#grupo'),
@@ -24,8 +27,27 @@ class MailboxPage
         markAsUnreadIcon: ()=> cy.get('[title="Marcar como no leído"]'),
         selectAllCheckbox: ()=> cy.get('#table [name="btSelectAll"]'),
         mailList:{
+            self: ()=> cy.get('#table > tbody > tr'),
             checkbox_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb).find('.bs-checkbox > input'),
-            mail_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb)
+            mail_nb: (nb)=> cy.get('#table > tbody > tr').eq(nb),
+            mail_infos: (group, from, subject)=> {
+                let i = 0
+                let mail_text = ''
+                let match = true
+                let end = false
+                while(!end)
+                {
+                    mail_text = Cypress.$(Cypress.$('#table > tbody > tr')[i]).text()
+                    cy.log('MAIL CONVERT TO => '+mail_text)
+                    match = new RegExp(from).test(mail_text)
+                    match &= new RegExp(group).test(mail_text)
+                    match &= new RegExp(subject).test(mail_text)
+                    if(match){ return  cy.get('#table > tbody > tr').eq(i)}
+                    i++
+                    if(mail_text===''){ end=true }
+                }
+                return  cy.get('#table > tbody > tr').eq(i)
+            }
         },
         newFolderModal:{
             nameInput: ()=> cy.get('#newFolder .modal-body input',{timeout:8000}),
@@ -46,56 +68,35 @@ class MailboxPage
                 markAllBtn: ()=> cy.get('[data-id="destinatario"]').parent().find('.bs-actionsbox').contains('Marcar todos'),
                 unmarkAllBtn: ()=> cy.get('[data-id="destinatario"]').parent().find('.bs-actionsbox').contains('Desmarcar todos'),
                 allOptions: ()=> cy.get('[data-id="destinatario"]').parent().find('ul > li > a'),
-                option_nb: (nb)=> cy.get('[data-id="destinatario"]').parent().find('ul > li > a').eq(nb)
+                option_nb: (nb)=> cy.get('[data-id="destinatario"]').parent().find('ul > li > a').eq(nb),
+                option_name: (name)=> cy.get('[data-id="destinatario"]').parent().find('ul > li > a > span').contains(name).parent()
             },
             ccField:{ //checked
                 toggleDropdownBtn: ()=> cy.get('[data-id="cc"]'),
                 markAllBtn: ()=> cy.get('[data-id="cc"]').parent().find('.bs-actionsbox').contains('Marcar todos'),
                 unmarkAllBtn: ()=> cy.get('[data-id="cc"]').parent().find('.bs-actionsbox').contains('Desmarcar todos'),
                 allOptions: ()=> cy.get('[data-id="cc"]').parent().find('ul > li > a'),
-                option_nb: (nb)=> cy.get('[data-id="cc"]').parent().find('ul > li > a').eq(nb)
+                option_nb: (nb)=> cy.get('[data-id="cc"]').parent().find('ul > li > a').eq(nb),
+                option_name: (name)=> cy.get('[data-id="cc"]').parent().find('ul > li > a > span').contains(name).parent()
             },
             ccoField:{ //to check
                 toggleDropdownBtn: ()=> cy.get('[data-id="cco"]'),
                 markAllBtn: ()=> cy.get('[data-id="cco"]').parent().find('.bs-actionsbox').contains('Marcar todos'),
                 unmarkAllBtn: ()=> cy.get('[data-id="cco"]').parent().find('.bs-actionsbox').contains('Desmarcar todos'),
                 allOptions: ()=> cy.get('[data-id="cco"]').parent().find('ul > li > a'),
-                option_nb: (nb)=> cy.get('[data-id="cco"]').parent().find('ul > li > a').eq(nb)
+                option_nb: (nb)=> cy.get('[data-id="cco"]').parent().find('ul > li > a').eq(nb),
+                option_name: (name)=> cy.get('[data-id="cco"]').parent().find('ul > li > a > span').contains(name).parent()
             },
             subjectField: ()=> cy.get("#asunto"), //to check
             attachmentField: ()=> cy.get('input[type="file"]'), //to check
             priorityField:{ //to check
+                toggleDropdownBtn: ()=> cy.get('[data-id="prioridad"]'),
                 allOptions: ()=> cy.get('[data-id="prioridad"]').parent().find('ul > li > a'),
-                option_nb: (nb)=> cy.get('[data-id="prioridad"]').parent().find('ul > li > a').eq(nb)
+                option_nb: (nb)=> cy.get('[data-id="prioridad"]').parent().find('ul > li > a').eq(nb),
+                option_name: (name)=> cy.get('[data-id="prioridad"]').parent().find('ul > li > a > span').contains(name).parent()
             },
             externCopyCheckbox: ()=> cy.get('#copiaExterna'), //to check
             receiptAcknowledgmentCheckBox: ()=> cy.get('#acuseRecibo'), //to check
-            textEditor:{
-                previewBtn: ()=> cy.get('[aria-label="Previsualizar"]'),
-                undoBtn: ()=> cy.get('[aria-label="Deshacer"]'),
-                redoBtn: ()=> cy.get('[aria-label="Rehacer"]'),
-                cutBtn: ()=> cy.get('[aria-label="Cortar"]'),
-                copyBtn: ()=> cy.get('[aria-label="Copiar"]'),
-                pasteBtn: ()=> cy.get('[aria-label="Pegar"]'),
-                selectAllBtn: ()=> cy.get('[aria-label="Seleccionar todo"]'),
-                uploadImageBtn: ()=> cy.get('[aria-label="Upload Image"]'),
-                insertEditLinkBtn: ()=> cy.get('[aria-label="Insertar/editar enlace"]'),
-                insertEditMediaBtn: ()=> cy.get('[aria-label="Insertar/editar medio"]'),
-                specialCharBtn: ()=> cy.get('[aria-label="Carácter especial"]'),
-                emojisBtn: ()=> cy.get('[aria-label="Emojis"]'),
-                horizontalLineBtn: ()=> cy.get('[aria-label="Línea horizontal"]'),
-                dateTime:{
-                    insertBtn: ()=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn').eq(0),
-                    openFormatChoice: ()=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn').eq(1),
-                    //chooseAndInsertFormat_nb: (nb)=> cy.get()
-                }
-                //insertDateTimeOption_nb: (nb)=> cy.get('[aria-label="Insertar fecha/hora"] > .tox-tbtn')
-                /*
-                copyBtn: ()=> cy.get('[aria-label="Copiar"]'),
-                copyBtn: ()=> cy.get('[aria-label="Copiar"]'),
-                copyBtn: ()=> cy.get('[aria-label="Copiar"]'),
-                copyBtn: ()=> cy.get('[aria-label="Copiar"]'),*/
-            },
             cancelBtn: ()=> cy.get('#enviar').siblings('[title="Cancelar"]'), //to check
             sendBtn: ()=> cy.get('#enviar') //to check
         }

@@ -1,0 +1,15 @@
+{
+  "user1": {
+    "name": "Alan",
+    "firstSurname": "Tutor",
+    "secondSurname": "Flexible",
+    "username": "tutor",
+    "profile": "Tutor",
+    "email": "tutor@flexible.es",
+    "documentType": "DNI",
+    "documentNumber": "85028043X",
+    "registrationDate": "2023-03-09",
+    "registrationDateFormatted": "09/03/2023",
+    "marca": "NCAMPUS"
+  }
+}

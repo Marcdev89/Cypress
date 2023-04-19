@@ -1,26 +1,26 @@
 {
   "admin": {
-    "name": "administradorQA",
-    "pass": "ncampus"
+    "name": "adminCampus",
+    "pass": "campus"
   },
 
   "tutor": {
-    "name": "tutor",
-    "pass": "1234"
+    "name": "tutorCampus",
+    "pass": "campus"
   },
 
   "alumno": {
-    "name": "alumna",
-    "pass": "1234"
+    "name": "alumnoCampus",
+    "pass": "campus"
   },
 
   "superadmin": {
-    "name": "sadmin",
-    "pass": "1234"
+    "name": "sadminCampus",
+    "pass": "campus"
   },
 
   "auditor": {
-    "name": "auditor",
-    "pass": "1234"
+    "name": "auditorCampus",
+    "pass": "campus"
   }
 }

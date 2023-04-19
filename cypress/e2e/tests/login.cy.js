@@ -6,6 +6,8 @@ describe('Login with different roles', () => {
         usersLogin.map((e)=>{         
             it(`'Login as a ${e.type} rol`, () => {
                 LoginPage.login(e.username,e.password)
+                // eslint-disable-next-line cypress/no-unnecessary-waiting
+                cy.wait(2000) //needed to charge new url path
                 e.username === 'alumna' 
                 ? 
                                cy.url().then(url => {
@@ -14,7 +16,7 @@ describe('Login with different roles', () => {
                                 url.includes('informacion-general') ? e.path = 'informacion-general' 
                                 :                             
                                 cy.url().should('include', e.path)
-                                })
+                                })                          
                 : 
                             cy.url().should('include', e.path)
                 cy.contains(e.expected, { matchCase: false })              
@@ -32,8 +34,7 @@ describe('Login fails', ()=>{
 
     it('Incorrect password: should show the password is incorrect alert', () => {
         LoginPage.login('AdministradorQA','min')
-        LoginPage.elements.errorAlert().should('have.text', 'La contraseña no es correcta')
-        
+        LoginPage.elements.errorAlert().should('have.text', 'La contraseña no es correcta')     
     });
 
     it('Empty fields: should show requieres fields alert', ()=>{   

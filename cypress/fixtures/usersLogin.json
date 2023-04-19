@@ -2,7 +2,7 @@
     {
         "type":"administrator",
         "username": "administradorQA",
-        "password": "W#m0EB3%7Occ",
+        "password": "ncampus",
         "expected": "Administrador",
         "path": "inicio-dashboard"
     },

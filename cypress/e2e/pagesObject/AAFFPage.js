@@ -1,5 +1,4 @@
 class AAFFPage {
-  AFWithGroupAssigned = { code: "001", name: "Accion Formativa 1" };
   // LOCATORS
   elements = {
     additionalHelp: () => cy.contains("Ayuda adicional"),

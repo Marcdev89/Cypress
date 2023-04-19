@@ -90,3 +90,8 @@ Cypress.Commands.add("typeOnIframe", (locator, text) => {
 Cypress.Commands.add("alertAssert", (text) => {
   cy.get(".snackbar-alert").should("have.text", text);
 });
+
+// Attach file
+Cypress.Commands.add("attachFile", (locator, filePath) => {
+  locator.selectFile(filePath, { force: true });
+});

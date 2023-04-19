@@ -21,6 +21,8 @@ class AAFFPage {
     table: {
       body: () => cy.get("table > #listadoGrupos"),
       rows: () => cy.get("#listadoGrupos").find("[data-index]"),
+      getRowByCode: (code) => cy.contains("td", code).parent(),
+      getRowField: (code, field) => cy.contains("td", code).parent().find("td").eq(field),
     },
 
     alerts: {
@@ -34,18 +36,18 @@ class AAFFPage {
   };
 
   // FUNCTIONS
-  isOnDB(code) {
+  searchOnDB(code) {
     cy.visit("/acciones-formativas");
     cy.textfield(this.elements.form.code(), code);
     this.elements.buttons.search().click();
-    this.elements.table.rows().should("contain", code);
+    this.elements.table.getRowByCode(code).should('be.visible')
   }
 
-  isNotOnDB(code) {
+  searchIfNotOnDB(code) {
     cy.visit("/acciones-formativas");
     cy.textfield(this.elements.form.code(), code);
     this.elements.buttons.search().click();
-    this.elements.table.rows().should("not.contain", code);
+    this.elements.table.rows().should("not.exist");
   }
 
   getTableRows() {
@@ -54,18 +56,19 @@ class AAFFPage {
   }
 
   deleteRowByCode(code) {
-    this.isOnDB(code);
-    this.elements.table.body().contains("tr", code).then((tableRow) => {
-        cy.wrap(tableRow).find('[title="Eliminar"]').click();
-        this.elements.alerts.modalDeleteYesButton().click();
-        this.elements.alerts.successfulDelete().should("exist");
-        this.elements.alerts.modalAcceptButton().click({ force: true });
-      });
+    this.searchOnDB(code);
+    this.elements.table.getRowByCode(code).find('[title="Eliminar"]').click();
+    this.elements.alerts.modalDeleteYesButton().click();
+    this.elements.alerts.successfulDelete().should("exist");
+    this.elements.alerts.modalAcceptButton().click({ force: true });
   }
 
   deleteRowClickNo(code) {
-    this.isOnDB(code);
-    this.elements.table.body().contains("tr", code).then((tableRow) => {
+    this.searchOnDB(code);
+    this.elements.table
+      .body()
+      .contains("tr", code)
+      .then((tableRow) => {
         cy.wrap(tableRow).find('[title="Eliminar"]').click();
         this.elements.alerts.modalDeleteNoButton().click({ force: true });
         this.elements.alerts.successfulDelete().should("not.exist");
@@ -73,12 +76,12 @@ class AAFFPage {
   }
 
   deleteAFWithGroupAssigned(code) {
-    this.isOnDB(code);
-    this.elements.table.body().contains("tr", code).then((tableRow) => {
-        cy.wrap(tableRow).find('[title="Eliminar"]').click();
-        this.elements.alerts.shouldNotHaveGroupsAssigned().should("exist");
-        this.elements.alerts.modalAcceptButton().click({ force: true });
-      });
+    this.searchOnDB(code);
+    this.elements.table.getRowByCode(code).find('[title="Eliminar"]').click();
+    this.elements.alerts.modalDeleteYesButton().click();
+    this.elements.alerts.shouldNotHaveGroupsAssigned().should("exist");
+    this.elements.alerts.modalAcceptButton().click({ force: true });
+    this.searchOnDB(code);
   }
 
   url= () => cy.visit('acciones-formativas')

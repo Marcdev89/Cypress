@@ -74,7 +74,7 @@ Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, valu
 
 // Gets iframe body
 Cypress.Commands.add("getIframeBody", (locator) => {
-  locator.its("0.contentDocument.body").should("be.visible").then(cy.wrap);
+  return cy.get(locator).its('0.contentDocument.body').should('be.visible');
 });
 
 // Types on iframe body

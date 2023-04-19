@@ -1,5 +1,6 @@
 import usersLogin from '../../fixtures/usersLogin.json';
 import LoginPage from "../pagesObject/LoginPage";
+import user from "../../fixtures/userTypes.json";
 
 describe('Login with different roles', () => { 
 
@@ -8,7 +9,7 @@ describe('Login with different roles', () => {
                 LoginPage.login(e.username,e.password)
                 // eslint-disable-next-line cypress/no-unnecessary-waiting
                 cy.wait(2000) //needed to charge new url path
-                e.username === 'alumna' 
+                e.username === 'alumnoCampus' 
                 ? 
                                cy.url().then(url => {
                                 url.includes('mis-cursos') ? e.path = 'mis-cursos' 
@@ -33,7 +34,7 @@ describe('Login fails', ()=>{
     });
 
     it('Incorrect password: should show the password is incorrect alert', () => {
-        LoginPage.login('AdministradorQA','min')
+        LoginPage.login(user.admin.name,'min')
         LoginPage.elements.errorAlert().should('have.text', 'La contraseña no es correcta')     
     });
 

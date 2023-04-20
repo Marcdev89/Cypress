@@ -48,10 +48,10 @@ class AdminPage
 
         configuration:{
             teachingCentersLink : () => cy.get('#list-centros > .subtitle-dashboard'),
-            callsLink: ()=>{ return cy.contains('Convocatorias') },
-            gdprClauseLink: ()=>{ return cy.contains('Cláusula GDPR') },
-            cauClauseLink: ()=>{ return cy.contains('Consultas CAU') },
-            followUpStudentConfigLink: ()=>{ return cy.contains('Config. seguimiento alumnos') }
+            conveningsLink: ()=> cy.get('#list-convocatorias > .subtitle-dashboard'),
+            gdprClauseLink: ()=> cy.contains('Cláusula GDPR'),
+            cauClauseLink: ()=> cy.contains('Consultas CAU'),
+            followUpStudentConfigLink: ()=> cy.contains('Config. seguimiento alumnos')
         },
         icons:{
 

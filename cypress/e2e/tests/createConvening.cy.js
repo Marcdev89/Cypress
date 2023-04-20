@@ -11,6 +11,7 @@ describe('Create new convening',function(){
         DashboardPage.elements.nCampusCard.nCampus().click()
         AdminPage.elements.configuration.conveningsLink().click()
         cy.url({timeout:8000}).should('eq',Cypress.config('baseUrl')+ConveningPage.elements.url)
+        ConveningPage.removeConveningIfExists(NewConveningPage.creationData[0].required.year)
         ConveningPage.elements.newConveningBtn().click()
     })
 
@@ -29,7 +30,7 @@ describe('Create new convening',function(){
     })
 
     it(`4.1.The system notify when required data(year) is missing [1/2]`, function(){
-        NewConveningPage.elements.denominationInput().type(NewConveningPage.creationData[0].required.denomination)
+        NewConveningPage.elements.denominationInput().type('only denomination')
         NewConveningPage.elements.saveBtn().click()
         cy.get(".snackbar-alert").should('not.have.text','')
     })
@@ -41,11 +42,10 @@ describe('Create new convening',function(){
     })
 
     it('5.The system create convening when all required fields filled but not all optional fields', function(){
-        NewConveningPage.elements.yearInput().type(NewConveningPage.creationData[1].required.year)
+        NewConveningPage.elements.yearInput().type(NewConveningPage.creationData[0].required.year)
         NewConveningPage.elements.denominationInput().type(NewConveningPage.creationData[1].required.denomination)
         NewConveningPage.elements.commentInput().type(NewConveningPage.creationData[1].other.comments)
         NewConveningPage.elements.saveBtn().click()
-
     })
 
     it('6.The system create convening when all fields filled', function(){

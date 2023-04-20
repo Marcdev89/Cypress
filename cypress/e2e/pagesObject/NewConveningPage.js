@@ -4,12 +4,12 @@ class NewConveningPage
     {
         required:
         {
-            year:2023,
+            year:2030,
             denomination:'convocatoria1'
         },
         other:
         {
-            file: new File([''],'header1.pdf',{type: "text/plain", lastModified: 1681462212002}),
+            file: 'cypress/support/test_files/test.pdf',
             emails:'nomail@nomail.com,nadie@ningunaparte.com',
             comments:'no comment',
             is_default:false
@@ -18,12 +18,12 @@ class NewConveningPage
     {
         required:
         {
-            year:2023,
+            year:2031,
             denomination:'convocatoria2'
         },
         other:
         {
-            file: new File([''],'header2.pdf',{type: "text/plain", lastModified: 1681462212018}),
+            file: 'cypress/support/test_files/test.pdf',
             emails:'sdf@sdfs.com,nnth@we.com',
             comments:'without comment',
             is_default:true
@@ -59,7 +59,7 @@ class NewConveningPage
     {
         this.elements.yearInput().type(this.creationData[data_set].required.year)
         this.elements.denominationInput().type(this.creationData[data_set].required.denomination)
-        this.elements.headerInputFile().selectFile('cypress/support/test_files/test.pdf',{force:true})
+        this.elements.headerInputFile().selectFile(this.creationData[data_set].other.file,{force:true})
         this.elements.emailsInput().type(this.creationData[data_set].other.emails)
         this.elements.commentInput().type(this.creationData[data_set].other.comments)
         this.elements.defaultConveningCheckBox().invoke('prop','checked', this.creationData[data_set].other.is_default).then(()=>{

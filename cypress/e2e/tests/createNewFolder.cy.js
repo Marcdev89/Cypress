@@ -7,7 +7,7 @@ describe('Create a new Folder as a "Tutor"', () => {
 
     beforeEach(() => {
         LoginPage.login(userTypes.tutor.name, userTypes.tutor.pass)
-        TutorHomePage.elements.groupCard.menu.mail().click()
+        TutorHomePage.elements.groupCard.menu.mailSpecificGroup().click()
     });
     
     it('create a new Folder', () => {
@@ -41,7 +41,7 @@ describe('Create a new Folder as a "Alumno"', () => {
     beforeEach(() => {
         LoginPage.login(userTypes.alumno.name, userTypes.alumno.pass)
         //need a locator from 'mis-cursos' PageObject
-        cy.get('[title="Correo"]').click()
+        cy.get('[title="demo25 - Demo Sprint 25"]').parents('.card-content').siblings('.botonera-container').find('[title="Correo"]').click()
 
     });
 

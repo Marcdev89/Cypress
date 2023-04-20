@@ -40,8 +40,8 @@ describe('Create a new Folder as a "Alumno"', () => {
 
     beforeEach(() => {
         LoginPage.login(userTypes.alumno.name, userTypes.alumno.pass)
-        //need a locator from formation's PageObject
-        cy.get('#btn-correo > img').click()
+        //need a locator from 'mis-cursos' PageObject
+        cy.get('[title="Correo"]').click()
 
     });
 

@@ -138,9 +138,11 @@ class NewTeachingCenterPage
 
     fillOnlyRequiredFields(nb,click='save',data_set=0)
     {
+        nb--;
         let emptyS = 'Seleccione...'
         let emptyI = '{selectall}{del}'
-        let required = this.creationData[data_set].required
+        let required = Object.assign({},this.creationData[data_set].required)
+        cy.log(JSON.stringify(required))
         let other_fields = {
             businessName: emptyI,
             locality: 'Municipio',
@@ -154,25 +156,26 @@ class NewTeachingCenterPage
 
         for(let x in required)
         {
-            if(nb<=i && /(centerType)|(country)/.test(x))
+            if(nb<i && /(centerType)|(country)/.test(x))
             {
                 required[x] = emptyS;
             }
-            else if(nb<=i && /province/.test(x))
+            else if(nb<i && /province/.test(x))
             {
                 required[x] = 'Provincia';
             }
-            else if(nb<=i)
+            else if(nb<i)
             {
                 required[x] = emptyI;
             }
 
-            if(nb<=i)
+            if(nb<i)
             {
                 required_fields_empty[x] = (required[x]===emptyI) ? '' : required[x]
             }
 
             i++
+            cy.log('loop nº'+i)
         }
         
         this.fillCreateCenterFormAnd(click,Object.assign({},required,other_fields))

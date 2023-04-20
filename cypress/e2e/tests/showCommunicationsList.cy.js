@@ -24,10 +24,10 @@ it('Show full communications list pressing "Ver Todo" button', () => {
 
 it('Show filtered list by AF', () => {
     
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeAF(),'002')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameAF(),'Accion Formativa 2: English')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeGroup(),'002')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameGroup(),'English group')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeAF(),'afdemo')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameAF(),'Tutorización')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeGroup(),'demo')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameGroup(),'Demo')
 
     FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
     FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible') 
@@ -36,10 +36,10 @@ it('Show filtered list by AF', () => {
 
 it('Show filtered list by Personal Data', () => {
     
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Kevin')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Alumno')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Regular')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'89720897J')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Pepe')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Fernández')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Díaz')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'74863914H')
 
     FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
     FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible')
@@ -61,18 +61,18 @@ it('Show full filtered list pressing "Buscar" button', () => {
     FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
     FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible')
 
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeAF(),'002')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameAF(),'Accion Formativa 2: English')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeGroup(),'002')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameGroup(),'English group')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeAF(),'afdemo')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameAF(),'Tutorización')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.codeGroup(),'demo')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.nameGroup(),'Demo')
 
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Kevin')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Alumno')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Regular')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'89720897J')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Pepe')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Fernández')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Díaz')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'74863914H')
 
     cy.textfield(FollowUpCommunicationsPage.elements.searchCard.sinceDate(),'2023-03-09')
-    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.toDate(), '2023-04-09')
+    cy.textfield(FollowUpCommunicationsPage.elements.searchCard.toDate(), '2099-04-09')
 
     FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
     FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible') 
@@ -87,6 +87,7 @@ describe('Show communications list as a Tutor', () => {
         LoginPage.login(userTypes.tutor.name, userTypes.tutor.pass)
         TutorHomePage.elements.groupCard.menu.communications().click()
         TutorCommunicationsPage.elements.lastCommunications.showAllBtn().click()
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
         cy.wait(2000)
     });
 
@@ -99,10 +100,10 @@ describe('Show communications list as a Tutor', () => {
 
     it('Show filtered list by Personal Data', () => {
     
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Kevin')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Alumno')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Regular')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'89720897J')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Pepe')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Fernández')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Díaz')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'74863914H')
     
         FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
         FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible')
@@ -112,7 +113,7 @@ describe('Show communications list as a Tutor', () => {
     it('Show filtered list by Date', () => {
     
         cy.textfield(FollowUpCommunicationsPage.elements.searchCard.sinceDate(),'2023-03-09')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.toDate(), '2023-04-09')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.toDate(), '2099-04-09')
     
         FollowUpCommunicationsPage.elements.searchCard.searchButton().click()
         FollowUpCommunicationsPage.elements.communicationsList.profileLink().eq(0).should('be.visible')
@@ -121,10 +122,10 @@ describe('Show communications list as a Tutor', () => {
 
     it('Show full filtered list pressing "Buscar" button', () => {
 
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Kevin')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Alumno')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Regular')
-        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'89720897J')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.name(),'Pepe')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.firstSurname(),'Fernández')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.secondSurname(),'Díaz')
+        cy.textfield(FollowUpCommunicationsPage.elements.searchCard.documentNumber(),'74863914H')
 
         cy.textfield(FollowUpCommunicationsPage.elements.searchCard.sinceDate(),'2023-03-09')
         cy.textfield(FollowUpCommunicationsPage.elements.searchCard.toDate(), '2023-04-09')

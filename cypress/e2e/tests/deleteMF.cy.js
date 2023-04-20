@@ -23,8 +23,7 @@ it('Deleting a MF as a Administrator', () => {
 
 it('Trying to delete a MF but it belongs to AF', () => {
     MMFFPage.elements.searchCard.btnShowAll().click()
-    //Need a complete AF (Arca de Noé)
-    cy.contains('Spam').siblings('.td-actions').find('[title="Eliminar"]').click()
+    cy.contains('MF1018_2 Intervención en la atención sociosanitaria en instituciones').siblings('.td-actions').find('[title="Eliminar"]').click()
     MMFFPage.elements.modalConfirm.btnYes().click()
     cy.get('#cuerpoModal').should('have.text', 'El módulo formativo no puede estar asignado a ninguna acción formativa')
 });

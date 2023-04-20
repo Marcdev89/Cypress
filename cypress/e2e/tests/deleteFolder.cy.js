@@ -32,8 +32,8 @@ describe('Delete Folder from Mail Menu as a "Tutor"', () => {
     before(()=>{
         //create a folder to be able to delete it
         LoginPage.login(userTypes.alumno.name, userTypes.alumno.pass)
-        //need a locator from formation's PageObject
-        cy.get('#btn-correo > img').click()
+        //need a locator from 'mis-cursos' PageObject
+        cy.get('[title="Correo"]').click()
         MailboxPage.elements.menu.newFolder().click()
         MailboxPage.elements.newFolderModal.nameInput().type('Destacados')    
         MailboxPage.elements.newFolderModal.saveBtn().click();

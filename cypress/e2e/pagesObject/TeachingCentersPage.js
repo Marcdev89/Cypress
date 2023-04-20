@@ -9,6 +9,7 @@ class TeachingCentersPage
         removeBtn: (index=0) => cy.get('.icons-tables[alt="Eliminar"]').eq(index),
         yesBtn: () => cy.get('.btn[data-field="si"][title="Sí"]'),
         noBtn: () => cy.get('.btn[data-field="no"][title="No"]'),
+        successModalText:() => cy.get('#cuerpoModal'),
         acceptBtn: () => cy.get('#modalExito [title="Aceptar"]', {force:true}),
         teachingCentersList: () => cy.get('#listadoGrupos tr'),
         teachingCenter_name: (name) => this.elements.teachingCentersList().contains('a',name),
@@ -17,23 +18,23 @@ class TeachingCentersPage
         tab: () => cy.get(`[onclick^='abrirPestana("/centros", 1)']`).eq(0)
     }
 
-    removeCenter(code, name, click_tab=true)
+    removeCenter(code, name, click_tab=true, click_accept=true)
     {
         this.searchCenter(code, name, {click_tab})
 
         //remove center
-        this.elements.teachingCentersList().should('not.have.text','').invoke('html')
+        this.elements.teachingCentersList().should('have.length',1).and('not.have.text','').invoke('html')
         .then((html) =>{
             if(!/No se han encontrado resultados/.test(html))
             {
-                this.elements.removeBtn().click()
-                this.elements.yesBtn().click()
-                this.elements.acceptBtn().click()
+                this.elements.removeBtn().click({force:true})
+                this.elements.yesBtn().should('be.visible').click()
+                if(click_accept){ this.elements.acceptBtn().should('be.visible').click() }
             }
         })
     }
 
-    searchCenter(code, name, actions)
+    searchCenter(code, name, actions={})
     {
         actions.click_center = (actions.click_center==undefined) ? false : actions.click_center
         actions.click_tab = (actions.click_tab == undefined) ? false : actions.click_tab

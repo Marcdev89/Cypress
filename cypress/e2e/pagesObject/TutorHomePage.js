@@ -33,6 +33,7 @@ class TutorHomePage {
                                 tutorials : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(4) > img'),
                                 calendar : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(5) > img'),
                                 mail : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(6) > img'),
+                                mailSpecificGroup: () => cy.get('[title="demosprint24 - Demo Sprint 24 AF Sencilla "]').parents('.card-content').siblings('.botonera-container').find('[title="Correo"]'),
                                 notifications : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(7) > img'),
                                 participants : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(8) > img'),
                                 classRoom : () => cy.get('#zonaGrid > .col-xl-4 > .card > .botonera-container > :nth-child(9) > img')

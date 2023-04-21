@@ -107,3 +107,7 @@ Cypress.Commands.add("alertAssert", (text) => {
 Cypress.Commands.add("attachFile", (locator, filePath) => {
   locator.selectFile(filePath, { force: true });
 });
+
+Cypress.Commands.add('closeTab', (url)=>{
+  cy.get(`[onclick^='cerrarPestana("/${url}")']`).click();
+});

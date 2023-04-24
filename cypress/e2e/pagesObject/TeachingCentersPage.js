@@ -45,6 +45,35 @@ class TeachingCentersPage
         this.elements.searchBtn().click()
         if(actions.click_center){ this.elements.teachingCenter_name(name).click() }
     }
+
+    createCenterIfNotexists(AdminPage, NewTeachingCenterPage, data_set)
+    {
+        let centerName = NewTeachingCenterPage.creationData[data_set].required.centerName
+        let patt = new RegExp(`>${centerName}</a>`)
+
+        return cy.get('#listadoGrupos').should('have.length.gte',1).and('not.have.text','')
+        .invoke('html').then((html_code)=>{
+
+            if(patt.test(html_code))
+            {
+                cy.log('EXISTS < '+centerName+' >')
+                cy.closeTab(this.elements.url)
+                return AdminPage.elements.configuration.teachingCentersLink().click()
+                .then(()=>{return false})
+            }
+            else
+            {
+                cy.log('NOT EXISTS < '+centerName+' >')
+                this.elements.newCenterBtn().click()
+                NewTeachingCenterPage.createCenterAndGoToCentersList(data_set)
+                cy.closeTab(this.elements.url)
+                return AdminPage.elements.configuration.teachingCentersLink().click()
+                .then(()=>{return true})
+            }
+        })
+    }
+
+
 }
 
 export default new TeachingCentersPage();

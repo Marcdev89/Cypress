@@ -142,7 +142,7 @@ class NewTeachingCenterPage
         let emptyS = 'Seleccione...'
         let emptyI = '{selectall}{del}'
         let required = Object.assign({},this.creationData[data_set].required)
-        cy.log(JSON.stringify(required))
+
         let other_fields = {
             businessName: emptyI,
             locality: 'Municipio',
@@ -175,7 +175,6 @@ class NewTeachingCenterPage
             }
 
             i++
-            cy.log('loop nº'+i)
         }
         
         this.fillCreateCenterFormAnd(click,Object.assign({},required,other_fields))

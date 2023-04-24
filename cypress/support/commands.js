@@ -80,7 +80,7 @@ Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, valu
  */
 Cypress.Commands.add("clickSelectOption", (locatorSelect, locatorOptions, value) => {
   locatorSelect().should('be.visible').click();
-  locatorOptions().contains(value).click();
+  locatorOptions().contains(value).click({force:true});
 }
 );
 

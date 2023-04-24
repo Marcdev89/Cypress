@@ -330,5 +330,12 @@ class NewTeachingCenterPage
         this.elements.contactEmailInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.contactEmail)
         this.elements.contactPhoneInput().should('be.visible').invoke(timeout,'val').and('be.eq',this.creationData[data_set].required.contactPhone)
     }
+
+    createCenterAndGoToCentersList(data_set)
+    {
+        this.fillCreateCenterFormAnd('save',data_set);
+        this.elements.succesModalBtn().click()
+        cy.closeTab(this.elements.urlEdit);
+    }
 }
 export default new NewTeachingCenterPage()

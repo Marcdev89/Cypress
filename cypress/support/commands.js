@@ -80,7 +80,7 @@ Cypress.Commands.add("pickOnSelectByValue", (locatorSelect, locatorOptions, valu
  */
 Cypress.Commands.add("clickSelectOption", (locatorSelect, locatorOptions, value) => {
   locatorSelect().should('be.visible').click();
-  locatorOptions().contains(value).click();
+  locatorOptions().contains(value).click({force:true});
 }
 );
 
@@ -106,4 +106,8 @@ Cypress.Commands.add("alertAssert", (text) => {
 // Attach file
 Cypress.Commands.add("attachFile", (locator, filePath) => {
   locator.selectFile(filePath, { force: true });
+});
+
+Cypress.Commands.add('closeTab', (url)=>{
+  cy.get(`[onclick^='cerrarPestana("/${url}")']`).click();
 });

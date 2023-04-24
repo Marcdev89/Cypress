@@ -21,7 +21,7 @@ class AdminPage
         },
 
         groups:{
-            groupsLink: ()=>{ return cy.contains('Grupos') },
+            groupsLink: ()=>{ return cy.get('#list-grupos [title="Grupos"]') },
             workGroupsLink: ()=>{ return cy.contains('Grupos de trabajo') },
             dumpGroupsLink: ()=>{ return cy.contains('Volcado de grupos') },
             usersListLink: ()=>{ return cy.contains('Listado usuarios') },

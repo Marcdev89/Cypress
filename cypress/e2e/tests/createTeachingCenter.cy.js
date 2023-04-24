@@ -11,11 +11,6 @@ describe('Creation of teaching center',()=>{
         DashboardPage.elements.nCampusCard.nCampus().click()
         AdminPage.elements.configuration.teachingCentersLink().click()
         TeachingCentersPage.elements.lookAllBtn().click()
-        TeachingCentersPage.elements.teachingCentersList().its('length')
-        .then( (completeListLength) => {
-            this.completeListLength = completeListLength
-            cy.log(completeListLength)
-        })
         TeachingCentersPage.elements.newCenterBtn().click()
         cy.url().should('eq',Cypress.config().baseUrl+NewTeachingCenterPage.elements.url)
     })

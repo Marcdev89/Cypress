@@ -6,40 +6,36 @@ import AdminPage from "../pagesObject/AdminPage"
 
 describe('Remove teaching center / Eliminar centro de impartición', function(){
     beforeEach(function(){
+        this.centerName = 'Centro Imparticion'
+        this.notAsignedCenterCode = '2'
+        this.asignedCenterCode = '1'
         LoginPage.login(user.admin.name, user.admin.pass)
         DashboardPage.elements.nCampusCard.nCampus().click()
         AdminPage.elements.configuration.teachingCentersLink().click()
         TeachingCentersPage.elements.lookAllBtn().click()
-        TeachingCentersPage.elements.teachingCentersList().its('length').should('be.gte',1)
-        .then( (completeListLength) => {
-            this.completeListLength = completeListLength
-        })
+        TeachingCentersPage.elements.teachingCentersList().children()
+        .should('not.have.length',1)
     })
 
-    it('Cancel the remove action',function(){
+    it('1.Cancel the remove action',function(){
         
-        TeachingCentersPage.elements.removeBtn(1).click()
+        TeachingCentersPage.searchCenter(this.notAsignedCenterCode,this.centerName+this.notAsignedCenterCode)
+        TeachingCentersPage.elements.removeBtn(0).click()
         TeachingCentersPage.elements.noBtn().click()
 
-        TeachingCentersPage.elements.teachingCentersList().should('have.length',this.completeListLength)
-        cy.contains('mi_nombre').should('be.visible')
+        cy.contains(this.centerName+this.notAsignedCenterCode).should('be.visible')
     })
 
-    it('Confirm the remove action',function(){
-        TeachingCentersPage.elements.removeBtn(3).click()
-        TeachingCentersPage.elements.yesBtn().click()
-        TeachingCentersPage.elements.acceptBtn().click()
+    it('2.Confirm the remove action',function(){
+        TeachingCentersPage.removeCenter(this.notAsignedCenterCode,this.centerName+this.notAsignedCenterCode, false)
 
-        TeachingCentersPage.elements.teachingCentersList().should('have.length',this.completeListLength-1)
-        cy.contains('CentroMagico').should('not.exist')
+        cy.contains(this.centerName+this.notAsignedCenterCode).should('not.exist')
     })
 
-    it('Try to remove teaching center associated to group',function(){
-        TeachingCentersPage.elements.removeBtn(0).click()
-        TeachingCentersPage.elements.yesBtn().click()
-        TeachingCentersPage.elements.acceptBtn().click()
+    it('3.Try to remove teaching center associated to group',function(){
+        TeachingCentersPage.removeCenter(this.asignedCenterCode,this.centerName+this.asignedCenterCode, false, false)
 
-        TeachingCentersPage.elements.teachingCentersList().should('have.length',this.completeListLength)
-        cy.contains('Lo Principal').should('be.visible')
+        cy.contains(this.centerName+this.asignedCenterCode).should('exist')
+        TeachingCentersPage.elements.successModalText().should('have.text','No se puede eliminar el centro. Existen grupos asociados.')
     })
 })

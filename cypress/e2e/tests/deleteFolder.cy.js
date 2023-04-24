@@ -2,6 +2,7 @@ import LoginPage from "../pagesObject/LoginPage";
 import userTypes from "../../fixtures/userTypes.json";
 import TutorHomePage from "../pagesObject/TutorHomePage";
 import MailboxPage from "../pagesObject/MailboxPage";
+import MyCoursesPage from "../pagesObject/MyCoursesPage";
 
 describe('Delete Folder from Mail Menu as a "Tutor"', () => { 
 
@@ -32,8 +33,7 @@ describe('Delete Folder from Mail Menu as a "Tutor"', () => {
     before(()=>{
         //create a folder to be able to delete it
         LoginPage.login(userTypes.alumno.name, userTypes.alumno.pass)
-        //need a locator from 'mis-cursos' PageObject
-        cy.get(':nth-child(1) > .card > .botonera-container > :nth-child(5) > img').click()
+        MyCoursesPage.elements.courseCard.selectingOptionByPosition(1,5).click()
         MailboxPage.elements.menu.newFolder().click()
         MailboxPage.elements.newFolderModal.nameInput().type('Destacados')    
         MailboxPage.elements.newFolderModal.saveBtn().click();

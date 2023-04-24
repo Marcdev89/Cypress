@@ -2,6 +2,7 @@ import LoginPage from "../pagesObject/LoginPage";
 import userTypes from "../../fixtures/userTypes.json";
 import TutorHomePage from "../pagesObject/TutorHomePage";
 import MailboxPage from "../pagesObject/MailboxPage";
+import MyCoursesPage from "../pagesObject/MyCoursesPage";
 
 describe('Create a new Folder as a "Tutor"', () => { 
 
@@ -40,9 +41,7 @@ describe('Create a new Folder as a "Alumno"', () => {
 
     beforeEach(() => {
         LoginPage.login(userTypes.alumno.name, userTypes.alumno.pass)
-        //need a locator from 'mis-cursos' PageObject
-        cy.get('[title="demo25 - Demo Sprint 25"]').parents('.card-content').siblings('.botonera-container').find('[title="Correo"]').click()
-
+        MyCoursesPage.elements.courseCard.selectingCourseByTitle('demo25 - Demo Sprint 25','Correo').click()
     });
 
     it('create a new Folder', () => {

@@ -6,7 +6,6 @@ import AdminPage from "../pagesObject/AdminPage"
 import NewTeachingCenterPage from "../pagesObject/NewTeachingCenterPage"
 import GroupsPage from "../pagesObject/GroupsPage"
 import AsignTeachingCenterPage from "../pagesObject/AsignTeachingCenterPage"
-var isCreatedCenter = false
 
 describe('Create asigned group', function(){
     beforeEach(function(){
@@ -17,37 +16,44 @@ describe('Create asigned group', function(){
 
     it('Creating center if not exists',function(){
         AdminPage.elements.configuration.teachingCentersLink().click()
-        TeachingCentersPage.elements.lookAllBtn().click()
-        TeachingCentersPage.createCenterIfNotexists( AdminPage, NewTeachingCenterPage, 0 )
-        .then(isCreated=>{ isCreatedCenter = isCreated })
+        for(let i = 0; i<2; i++)
+        {
+            TeachingCentersPage.elements.lookAllBtn().click()
+            TeachingCentersPage.createCenterIfNotexists( AdminPage, NewTeachingCenterPage, i )
+        }
     })
 
     
-    it('Asign center to group', function(){
-        cy.log('Value => '+isCreatedCenter)
-        if(isCreatedCenter)
-        {
-            AdminPage.elements.groups.groupsLink().click()
-            GroupsPage.elements.btn.seeAll().click()
-            GroupsPage.elements.group.btn.asignCenter('20198000080667').click()
-            AsignTeachingCenterPage.elements.center
-            .checkBox(NewTeachingCenterPage.creationData[0].required.centerName).click()
-            AsignTeachingCenterPage.elements
-            .centerTypeSelect(AsignTeachingCenterPage.creationData[0].required.centerType)
-            AsignTeachingCenterPage.elements.input.initDate()
-            .type(AsignTeachingCenterPage.creationData[0].required.initDate)
-            AsignTeachingCenterPage.elements.input.endDate()
-            .type(AsignTeachingCenterPage.creationData[0].required.endDate)
-            AsignTeachingCenterPage.elements.btn.asign().click()
-        }
+    it('Asign center to group if not asigned', function(){
+        AdminPage.elements.groups.groupsLink().click()
+        GroupsPage.elements.btn.seeAll().click()
+        GroupsPage.elements.group.btn.asignCenter('20198000080667').click()
+        cy.url().should('be.eq',Cypress.config('baseUrl')+AsignTeachingCenterPage.elements.url)
+        AsignTeachingCenterPage.isAsignableCenter(NewTeachingCenterPage.creationData[0].required.centerName)
+        .then((isAsigned)=>{
+            cy.log('ASIGNED?:'+isAsigned)
+            if(!isAsigned)
+            {
+                AsignTeachingCenterPage.elements.center
+                .checkBox(NewTeachingCenterPage.creationData[0].required.centerName).click()
+                AsignTeachingCenterPage.elements
+                .centerTypeSelect(AsignTeachingCenterPage.creationData[0].required.centerType)
+                AsignTeachingCenterPage.elements.input.initDate()
+                .type(AsignTeachingCenterPage.creationData[0].required.initDate)
+                AsignTeachingCenterPage.elements.input.endDate()
+                .type(AsignTeachingCenterPage.creationData[0].required.endDate)
+                AsignTeachingCenterPage.elements.btn.asign().click()
+            }
+        })
     })
 })
 
 describe('Remove teaching center', function(){
     beforeEach(function(){
-        this.centerName = 'Centro Imparticion'
-        this.notAsignedCenterCode = '2'
-        this.asignedCenterCode = '1'
+        this.asignedCenterName = NewTeachingCenterPage.creationData[0].required.centerName
+        this.notAsignedCenterName = NewTeachingCenterPage.creationData[1].required.centerName
+        this.asignedCenterCode = NewTeachingCenterPage.creationData[0].required.cif
+        this.notAsignedCenterCode = NewTeachingCenterPage.creationData[1].required.cif
         LoginPage.login(user.admin.name, user.admin.pass)
         DashboardPage.elements.nCampusCard.nCampus().click()
         AdminPage.elements.configuration.teachingCentersLink().click()
@@ -58,17 +64,17 @@ describe('Remove teaching center', function(){
 
     it('1.Cancel the remove action',function(){
         
-        TeachingCentersPage.searchCenter(this.notAsignedCenterCode,this.centerName+this.notAsignedCenterCode)
+        TeachingCentersPage.searchCenter(this.notAsignedCenterCode,this.notAsignedCenterName)
         TeachingCentersPage.elements.removeBtn(0).click()
         TeachingCentersPage.elements.noBtn().click()
 
-        cy.contains(this.centerName+this.notAsignedCenterCode).should('be.visible')
+        cy.contains(this.notAsignedCenterName).should('be.visible')
     })
 
     it('2.Confirm the remove action',function(){
-        TeachingCentersPage.removeCenter(this.notAsignedCenterCode,this.centerName+this.notAsignedCenterCode, false)
+        TeachingCentersPage.removeCenter(this.notAsignedCenterCode,this.notAsignedCenterName, false)
 
-        cy.contains(this.centerName+this.notAsignedCenterCode).should('not.exist')
+        cy.contains(this.notAsignedCenterName).should('not.exist')
     })
 
     it('3.Try to remove teaching center associated to group',function(){

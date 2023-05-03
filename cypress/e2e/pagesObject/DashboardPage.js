@@ -4,7 +4,7 @@ class DashboardPage {
   elements = {
     title: () => cy.get(".title no-margin"),
     infoIcon: () => cy.get(".extra-info"),
-    campus: () => cy.get('[title="Campus"]'),
+    campusTitle: () => cy.get('[title="Campus"]'),
     help: () => cy.contains("Ayuda adicional", { matchCase: false }),
     helpIcon: () => cy.get(".button-help"),
 

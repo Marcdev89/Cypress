@@ -2,35 +2,35 @@
     {
         "type":"administrator",
         "username": "adminCampus",
-        "password": "campus",
+        "password": "adminpass",
         "expected": "Administrador",
         "path": "inicio-dashboard"
     },
     {
         "type":"teacher",
-        "username": "tutorCampus",
-        "password": "campus",
+        "username": "teacherCampus",
+        "password": "teacherpass",
         "expected": "Tutor",
         "path": "inicio-tutor"
     },
     {
         "type":"student",
-        "username": "alumnoCampus",
-        "password": "campus",
+        "username": "studentCampus",
+        "password": "studentpass",
         "expected": "Alumno",
         "path": "formacion"
     },
     {
         "type":"auditor",
         "username": "auditorCampus",
-        "password": "campus",
+        "password": "auditorpass",
         "expected": "Auditor",
         "path": "inicio-auditor"
     },
     {
         "type":"superadmin",
         "username": "sadminCampus",
-        "password": "campus",
+        "password": "sadminpass",
         "expected": "Superadministrador",
         "path": "inicio-superadmin"
     }

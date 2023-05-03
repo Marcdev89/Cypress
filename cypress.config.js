@@ -16,7 +16,6 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    //need to be changed by .env
     baseUrl: process.env.QA_URL
   },
 });

@@ -38,7 +38,7 @@ class AdminPage
         },
 
         followup:{
-            followUpStudentProgressLink: ()=>{ return cy.contains('Seguimiento y progresos de alumnos') },
+            followUpStudentProgressLink: ()=>cy.get('#seg-prog-alumnos'),
             followUpTasksLink: ()=>{ return cy.contains('Seguimiento de tareas') },
             followUpSurveysLink: ()=>{ return cy.contains('Seguimiento de encuestas') },
             evaluationQuestionnaireBonusLink: ()=>{ return cy.contains('Cuestionario de evaluación (Bonificado)') },
